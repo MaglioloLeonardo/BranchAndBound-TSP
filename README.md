@@ -1,84 +1,55 @@
 <h1>🚀 Branch and Bound for the Traveling Salesman Problem (TSP)</h1>
 
 <p>
-This project implements the <strong>Branch and Bound</strong> algorithm to solve the 
-<strong>Traveling Salesman Problem (TSP)</strong>, leveraging the <strong>1-Tree relaxation method</strong> 
-proposed by <strong>Held & Karp</strong>. The implementation balances efficiency and accuracy, 
-incorporating Lagrangian relaxation for improved lower bounds.
+This project presents an optimized implementation of the <strong>Branch and Bound</strong> algorithm 
+to solve the <strong>Traveling Salesman Problem (TSP)</strong>. The work is based on the <strong>1-Tree relaxation</strong> 
+introduced by <strong>Held & Karp</strong>, which provides a powerful bounding mechanism to improve the efficiency 
+of exact methods.
+</p>
+
+<p>
+The implementation adopts a <strong>parallel computing approach</strong> to speed up the search process, 
+leveraging <strong>multi-threading</strong> and different <strong>search strategies</strong> such as 
+Best-First Search (BFS) and Depth-First Search (DFS).
 </p>
 
 <hr>
 
-<h2>📄 Paper Overview</h2>
+<h2>📄 Project Overview</h2>
 
 <ul>
-  <li><strong>Understanding the TSP</strong>: A fundamental NP-complete combinatorial optimization problem.</li>
-  <li><strong>1-Tree Relaxation (Held & Karp, 1970s)</strong>: A technique to obtain an informative lower bound.</li>
-  <li><strong>Branch and Bound Method</strong>: An exact algorithm for finding the optimal solution.</li>
-  <li><strong>Bounding Techniques</strong>: Using 1-Tree relaxation and Lagrangian relaxation to enhance efficiency.</li>
-  <li><strong>Implementation Analysis</strong>: Evaluating computational performance on different datasets.</li>
+  <li><strong>Problem:</strong> The TSP is a well-known NP-hard problem where a salesman must visit all cities exactly once and return to the starting point, minimizing travel cost.</li>
+  <li><strong>Method:</strong> The solution is based on a <strong>Branch and Bound algorithm</strong> with an optimized bounding function derived from the <strong>1-Tree relaxation</strong>.</li>
+  <li><strong>Bounding Strategy:</strong> The algorithm computes a lower bound by solving a Minimum Spanning Tree (MST) with additional constraints.</li>
+  <li><strong>Parallelism:</strong> The implementation supports parallel execution, allowing multiple branches of the search tree to be explored concurrently.</li>
+  <li><strong>Pruning Techniques:</strong> The approach dynamically eliminates suboptimal paths to improve computational efficiency.</li>
 </ul>
 
 <hr>
 
-<h2>🚀 Project Implementation</h2>
+<h2>🚀 Implementation Details</h2>
 
-<p>The core implementation consists of three main components:</p>
-
-<h3>1️⃣ Branch and Bound Algorithm</h3>
 <ul>
-  <li><strong>File:</strong> <code>BranchAndBound.java</code></li>
-  <li><strong>Functionality:</strong>
-    <ul>
-      <li>Implements a <strong>multi-threaded Branch and Bound approach</strong> for TSP.</li>
-      <li>Supports <strong>Best-First Search (BFS) and Depth-First Search (DFS)</strong> policies.</li>
-      <li>Uses <strong>a queue to manage subproblems</strong>, allowing parallel execution.</li>
-      <li>Integrates <strong>bounding techniques</strong> to prune unpromising paths early.</li>
-      <li>Identifies <strong>one-way nodes and infeasible solutions</strong> to improve efficiency.</li>
-    </ul>
-  </li>
-</ul>
-
-<h3>2️⃣ 1-Tree Relaxation and Intermediate Problem Representation</h3>
-<ul>
-  <li><strong>File:</strong> <code>IntermediateProblem.java</code></li>
-  <li><strong>Functionality:</strong>
-    <ul>
-      <li>Constructs the <strong>1-Tree relaxation</strong> by:
-        <ul>
-          <li>Computing a <strong>Minimum Spanning Tree (MST)</strong> excluding a specific node.</li>
-          <li>Adding the <strong>two lowest-cost edges</strong> to restore connectivity.</li>
-        </ul>
-      </li>
-      <li><strong>Calculates the bound</strong> (lower bound) for pruning in Branch and Bound.</li>
-      <li>Detects <strong>Hamiltonian cycles</strong>, ensuring feasibility of solutions.</li>
-      <li>Generates <strong>new subproblems</strong> by fixing or excluding edges.</li>
-    </ul>
-  </li>
-</ul>
-
-<h3>3️⃣ Solution Representation</h3>
-<ul>
-  <li><strong>File:</strong> <code>Solution.java</code></li>
-  <li><strong>Functionality:</strong>
-    <ul>
-      <li>Stores the <strong>optimal solution path and cost</strong>.</li>
-      <li>Manages <strong>state transitions</strong> (Pending → Feasible → Resolved/Infeasible).</li>
-      <li>Tracks <strong>node statistics</strong>, including:
-        <ul>
-          <li>Explored nodes</li>
-          <li>Pruned nodes (by bounds)</li>
-          <li>Infeasible paths</li>
-        </ul>
-      </li>
-      <li>Generates <strong>execution statistics</strong> for performance evaluation.</li>
-    </ul>
-  </li>
+  <li><strong>1-Tree Relaxation:</strong> The Held-Karp bound is computed by constructing a 1-Tree, which provides a relaxed version of the TSP.</li>
+  <li><strong>Branching Strategy:</strong> The problem is recursively divided by fixing and excluding edges, progressively refining the solution.</li>
+  <li><strong>Parallel Search:</strong> The algorithm supports multithreading, with a task queue managing subproblems dynamically.</li>
+  <li><strong>Search Policies:</strong> Users can choose between <strong>Best-First Search (BFS)</strong> and <strong>Depth-First Search (DFS)</strong> for different exploration strategies.</li>
+  <li><strong>Termination Criteria:</strong> The algorithm stops when an optimal solution is found or when all subproblems have been processed.</li>
 </ul>
 
 <hr>
 
-<p>🔥 <em>This project provides a structured and efficient approach to solving TSP with Branch and Bound. 
+<h2>📈 Results and Performance</h2>
+
+<ul>
+  <li><strong>Scalability:</strong> The implementation is designed to efficiently handle large problem instances using parallel computation.</li>
+  <li><strong>Execution Time Optimization:</strong> The use of lower bounding techniques significantly reduces the number of nodes explored.</li>
+  <li><strong>Experimental Validation:</strong> The approach has been tested on benchmark TSP instances, showing competitive results in terms of execution time and solution quality.</li>
+</ul>
+
+<hr>
+
+<p>🔥 <em>This project provides an efficient and scalable approach to solving TSP using Branch and Bound with 1-Tree relaxation. 
 Feel free to explore, test, and contribute!</em> 🚀</p>
 
 <br>
